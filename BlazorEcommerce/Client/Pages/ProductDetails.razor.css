@@ -1,0 +1,28 @@
+﻿.media-img {
+    max-height: 300px;
+    max-width: 500px;
+    border-radius: 6px;
+    margin: 0 10px 10px 10px
+}
+
+.media-img-wrapper {
+    max-height: 300px;
+    max-width: 500px;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 7668px) {
+    .media-img {
+        max-width: 300px;
+    }
+
+    .media {
+        flex-direction: column;
+    }
+
+    .media-img-wrapper {
+        width: 100%;
+        height: auto;
+    }
+}
