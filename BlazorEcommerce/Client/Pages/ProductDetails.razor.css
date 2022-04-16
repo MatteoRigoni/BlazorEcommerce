@@ -12,6 +12,10 @@
     margin-bottom: 20px;
 }
 
+.original-price {
+    text-decoration: line-through!important;
+}
+
 @media (max-width: 7668px) {
     .media-img {
         max-width: 300px;
