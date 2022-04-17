@@ -1,0 +1,71 @@
+﻿@page "/orders/{orderId:int}"
+@inject IOrderService OrderService
+
+@if (order == null)
+{
+    <span>Loading order...</span>
+}
+else
+{
+    <h3>Order from @order.OrderDate</h3>
+
+    <div>
+        @foreach (var product in order.Products)
+        {
+            <div class="container">
+                <div class="image-wrapper">
+                    <img src="@product.ImageUrl" class="image" />
+                </div>
+                <div class="name">
+                    <h5><a href="/product/@product.ProductId">@product.Title</a></h5>
+                    <span>@product.ProductType</span><br />
+                    <span>Quantity: @product.Quantity</span>
+                </div>
+                <div class="product-price">$@product.TotalPrice</div>
+            </div>
+        }
+        <div class="product-price">
+            Total: $@order.TotalPrice
+        </div>
+    </div>
+}
+
+<style type="text/css">
+    .container {
+        display: flex;
+        padding: 6px;
+    }
+
+    .image-wrapper {
+        width: 150px;
+        text-align: center;
+    }
+
+    .image {
+        max-height: 150px;
+        max-width: 150px;
+        padding: 6px;
+    }
+
+    .name {
+        flex-grow: 1;
+        padding: 6px;
+    }
+
+    .product-price {
+        font-weight: 600;
+        text-align: right;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public int OrderId { get; set; }
+
+    OrderDetailsResponse order = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        order = await OrderService.GetOrderDetails(OrderId);
+    }
+}
